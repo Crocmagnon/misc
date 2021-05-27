@@ -1,0 +1,14 @@
+version: "2.4"
+services:
+  app:
+    image: python:3.9-slim
+    command: python /app/app.py
+    volumes:
+      - ./:/app
+    networks:
+      - nginx-proxy-manager_default
+
+networks:
+  nginx-proxy-manager_default:
+    external: true
+
