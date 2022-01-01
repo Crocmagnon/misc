@@ -1,10 +1,14 @@
-import base64, requests
+import base64, requests, sys, os
 
 
 def main():
     s = requests.Session()
+    token = os.getenv("GITEA_TOKEN")
+    if not token:
+        print("please specify a token")
+        sys.exit(1)
     s.headers = {
-        "Authorization": "token ***REMOVED***",
+        "Authorization": f"token {token}",
         "Accept": "application/json",
     }
     res = s.get("https://git.augendre.info/api/v1/repos/search?limit=100")
